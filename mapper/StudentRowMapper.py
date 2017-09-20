@@ -2,7 +2,7 @@ import datetime
 from model.Student import Student
 class StudentRowMapper:
     """
-    
+       This class is used by DAO Implementation classes. 
     """
 
 

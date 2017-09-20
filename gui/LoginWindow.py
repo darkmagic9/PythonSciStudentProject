@@ -34,12 +34,15 @@ from PyQt5 import QtGui
 
 from gui.StudentFindAllWindow import StudentFindAllWindow
 from others.SimpleConverter import SimpleConverter
+from encryption.UserManager import UserManager
+from encryption.User import User
 
 class LoginWindow(QDialog):
     def __init__(self):
         super().__init__()
         self.title = "Login Window"
         self.left , self.top, self.width , self.height = 10 , 10, 500, -1
+        self.userManager = UserManager()
         # self.data = self.generate_units()
         self.initGUI()
 
@@ -76,12 +79,21 @@ class LoginWindow(QDialog):
         self.btnLogin.clicked.connect(self.onBtnLoginClicked)
         self.btnClear.clicked.connect(self.onBtnClearClicked)
 
+
+    def checkIfUserExists(self, username, password):
+        allUsers = self.userManager.find_all()
+        for user in allUsers:
+            if(username == user.userName and password == user.password):
+                return True
+        return False
+
     @pyqtSlot()
     def onBtnLoginClicked(self):
         try:
             username = self.editUserName.text()
             password = self.editPassword.text()
-            if username != "foo" or password != "bar":
+
+            if not(self.checkIfUserExists(username, password)):
                 raise Exception("Username or Password was not correct.")
 
             window = StudentFindAllWindow()
