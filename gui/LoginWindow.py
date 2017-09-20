@@ -98,6 +98,8 @@ class LoginWindow(QDialog):
         self.editPassword.setText("")
 
 
+
+
 app = QApplication(sys.argv)
 runner = LoginWindow()
 runner.show()
