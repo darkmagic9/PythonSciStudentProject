@@ -1,0 +1,87 @@
+1) Volume 
+Milliliter -> 10^-6 cubicmeter 
+Cubiccentimeter -> 10^-6 cubicmeter 
+Liter -> 0.001 cubicmeter 
+Cubicmeter 
+teaspoon(USA) -> 5* 10^-6 cubicmeter 
+tablespoon(USA) -> 15 * 10^-6 cubicmeter 
+fluid ounce (USA) -> 3* 10^-5 cubicmeter 
+jigger (USA) ->   237* 10^-6 
+pint (USA) -> 473* 10^-6 
+quart(USA) -> 946 * 10^-6
+gallon(USA) -> 3785*10^-6
+cubic inch -> 16* 10^-6
+cubic foot -> 28317* 10^-6 
+cubic yard -> 764555* 10^-6
+
+teaspoon(GB) -> 6*10^-6
+tablespoon(GB) -> 18*10^-6
+fluid ounce (GB) -> 28*10^-6
+pint (GB) -> 568*10^-6
+quart(GB)  -> 1137*10^-6
+gallon(GB) -> 4546*10^-6
+
+################################################################
+
+2) Distance
+Nanometer -> 10^-9 m 
+Micrometer -> 10^-6 m 
+Millimeter -> 10^-3 m  
+Centimeter -> 10^-2 m 
+Meter
+Kilometer -> 10^3 m 
+Inch  -> 254* 10^-4
+Foot -> 3048^10-4
+Yard -> 9144^10-4
+Mile -> 1609.344 
+Seemile -> 1852
+
+
+
+################################################################
+3) Weights and Measures 
+carat  -> 0.2 gram
+milligram -> 10^-3 gram  
+centigram -> 10^-2 gram 
+decigram -> 0.1 gram 
+gram  
+decagram -> 10  
+hectogram -> 100 
+kilogram -> 1000
+ton -> 10^6 
+ounce -> 28.34952
+pound -> 453.5924
+stone -> 6350.293
+
+
+
+################################################################
+4) Temperature 
+celcius  ->  33.8 fahrenheit
+fahrenheit
+kelvin -> -457.87 fahrenheit
+
+################################################################
+5) Area
+square mm  = 10^-6 square m
+square cm  -> 10^-4 square m 
+square m
+hectar -> 10000 hectar 
+square km  -> 10^6
+square inch  -> 645*10^-6 
+square foot  -> 92903^10-6
+square yard -> 836127^10-6 
+acre -> 4046.856
+square mile -> 2,589,988
+################################################################
+6) Time 
+microsecond -> 10^-6
+millisecond -> 10^-3 s
+second 
+minute -> 60 
+hour -> 3600
+day -> 24*3600
+week -> 7*24*3600
+year -> 52*week 
+
+################################################################

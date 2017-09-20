@@ -1,0 +1,26 @@
+[
+    {
+        "dob": "1993-10-10",
+        "email": "leomessi@gmail.com",
+        "enrolmentNumber": 3,
+        "faculty": "ai",
+        "firstName": "new_leo",
+        "lastName": "new_messi"
+    },
+    {
+        "dob": "1991-10-10",
+        "email": "foobar@gmail.com",
+        "enrolmentNumber": 1,
+        "faculty": "ai",
+        "firstName": "foo",
+        "lastName": "bar"
+    },
+    {
+        "dob": "1995-10-10",
+        "email": "new_edunew_tilos@gmail.com",
+        "enrolmentNumber": 2,
+        "faculty": "angewandte informatik",
+        "firstName": "new_edu",
+        "lastName": "new_tilos"
+    }
+]

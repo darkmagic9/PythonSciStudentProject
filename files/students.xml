@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<Students>
+<Student enrolmentNumber = "1">
+<FirstName>foo</FirstName>
+<LastName>bar</LastName>
+<DOB>1991-10-10</DOB>
+<Faculty>ai</Faculty>
+<Email>foobar@gmail.com</Email>
+</Student>
+<Student enrolmentNumber = "2">
+<FirstName>edu</FirstName>
+<LastName>tilos</LastName>
+<DOB>1992-10-10</DOB>
+<Faculty>ai</Faculty>
+<Email>edutilos@gmail.com</Email>
+</Student>
+<Student enrolmentNumber = "3">
+<FirstName>leo</FirstName>
+<LastName>messi</LastName>
+<DOB>1993-10-10</DOB>
+<Faculty>ai</Faculty>
+<Email>leomessi@gmail.com</Email>
+</Student>
+</Students>
