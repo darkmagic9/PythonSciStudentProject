@@ -1,0 +1,50 @@
+[
+    {
+        "dob": "1993-10-10",
+        "email": "leomessi@gmail.com",
+        "enrolmentNumber": 3,
+        "faculty": "ai",
+        "firstName": "new_leo",
+        "lastName": "new_messi"
+    },
+    {
+        "dob": "1991-10-10",
+        "email": "foobar@gmail.com",
+        "enrolmentNumber": 1,
+        "faculty": "ai",
+        "firstName": "foo",
+        "lastName": "bar"
+    },
+    {
+        "dob": "1995-10-10",
+        "email": "new_edunew_tilos@gmail.com",
+        "enrolmentNumber": 2,
+        "faculty": "angewandte informatik",
+        "firstName": "new_edu",
+        "lastName": "new_tilos"
+    },
+    {
+        "dob": "1999-10-10",
+        "email": "edutilos@gmail.com",
+        "enrolmentNumber": 4,
+        "faculty": "ai",
+        "firstName": "edu",
+        "lastName": "tilos"
+    },
+    {
+        "dob": "1989-11-11",
+        "email": "crisronaldo@gmail.com",
+        "enrolmentNumber": 5,
+        "faculty": "ai",
+        "firstName": "cris",
+        "lastName": "ronaldo"
+    },
+    {
+        "dob": "1988-10-10",
+        "email": "marocpolo@mail.rub.de",
+        "enrolmentNumber": 6,
+        "faculty": "angewandte informatik",
+        "firstName": "marco",
+        "lastName": "polo"
+    }
+]

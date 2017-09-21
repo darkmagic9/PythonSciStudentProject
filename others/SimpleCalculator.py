@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QWidget, QPushButton
 
 
+from math import *
+
 class SimpleCalculator(QDialog):
     """
     With this class simple calculator app is created.
