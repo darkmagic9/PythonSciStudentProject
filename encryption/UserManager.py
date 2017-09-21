@@ -1,6 +1,6 @@
 import sqlite3
 from encryption.UserRowMapper import UserRowMapper
-
+from encryption.Sha256Hasher import Sha256Hasher
 
 class UserManager:
     """
@@ -17,6 +17,7 @@ class UserManager:
         self.filename = "../dbs/User.sqlite"
         self.tablename = "User"
         self.db, self.cursor = None, None
+        self.hasher = Sha256Hasher()
 
     def connect(self):
         """
@@ -84,7 +85,7 @@ PRIMARY KEY(username, password)
         self.connect()
         try:
             sql = """insert into {0} values ("{1}","{2}")""".format(
-                self.tablename, user.userName, user.password
+                self.tablename, user.userName, self.hasher.hash_password(user.password)
             )
 
             self.cursor.execute(sql)
@@ -109,8 +110,8 @@ PRIMARY KEY(username, password)
         try:
             sql = """update {0} set userName = "{1}", password = "{2}"
 where userName = "{3}" and password = "{4}" """.format(
-                self.tablename, newUser.userName, newUser.password,
-                oldUser.userName, oldUser.password
+                self.tablename, newUser.userName, self.hasher.hash_password(newUser.password),
+                oldUser.userName, self.hasher.hash_password(oldUser.password)
             )
             self.cursor.execute(sql)
             self.db.commit()

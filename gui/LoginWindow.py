@@ -36,6 +36,7 @@ from gui.StudentFindAllWindow import StudentFindAllWindow
 from others.SimpleConverter import SimpleConverter
 from encryption.UserManager import UserManager
 from encryption.User import User
+from encryption.Sha256Hasher import Sha256Hasher
 
 class LoginWindow(QDialog):
     def __init__(self):
@@ -43,6 +44,7 @@ class LoginWindow(QDialog):
         self.title = "Login Window"
         self.left , self.top, self.width , self.height = 10 , 10, 500, -1
         self.userManager = UserManager()
+        self.hasher = Sha256Hasher()
         # self.data = self.generate_units()
         self.initGUI()
 
@@ -83,7 +85,7 @@ class LoginWindow(QDialog):
     def checkIfUserExists(self, username, password):
         allUsers = self.userManager.find_all()
         for user in allUsers:
-            if(username == user.userName and password == user.password):
+            if(username == user.userName and self.hasher.check_password(user.password, password)):
                 return True
         return False
 
