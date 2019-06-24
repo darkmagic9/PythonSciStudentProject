@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from encryption.UserManager import UserManager
 from encryption.User import User 
 import datetime
