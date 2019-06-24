@@ -47,7 +47,7 @@ class StudentFindAllWindow(QDialog):
         """
         super().__init__()
         self.title = "All Students"
-        self.left , self.top, self.width , self.height = 10 , 10, 900, 500
+        self.left , self.top, self.width , self.height = 50 , 50, 900, 500
         self.dao = StudentDAOSqliteImpl()
         self.mapper = StudentListMapper()
         self.initGUI()

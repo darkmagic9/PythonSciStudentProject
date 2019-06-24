@@ -22,7 +22,7 @@ class SimpleTictactoe(QDialog):
         """
         super().__init__()
         self.title = "Simple Tictactoe"
-        self.left , self.top , self.width , self.height = 10, 10, -1, -1
+        self.left , self.top , self.width , self.height = 50, 50, -1, -1
         self.initGUI()
 
     def initGUI(self):

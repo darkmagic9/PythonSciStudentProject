@@ -33,7 +33,7 @@ class StudentSaveWindow(QDialog):
         super().__init__()
         self.tableWidget = tableWidget
         self.title = "Save New Student"
-        self.left , self.top , self.width , self.height = 10, 10, 500, 500
+        self.left , self.top , self.width , self.height = 50, 50, 500, 500
         self.validator = StudentValidator()
         self.dao = StudentDAOSqliteImpl()
         self.initGUI()

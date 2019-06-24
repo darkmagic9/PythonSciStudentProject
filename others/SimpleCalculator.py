@@ -20,7 +20,7 @@ class SimpleCalculator(QDialog):
         """
         super().__init__()
         self.title = "Simple Calculator"
-        self.left, self.top, self.width , self.height = 10 , 10, 500, 500
+        self.left, self.top, self.width , self.height = 50 , 50, 500, 500
         self.initGUI()
 
 

@@ -1,4 +1,6 @@
 import sqlite3
+import sys
+print(sys.argv[0])
 from dao.StudentDAO import StudentDAO
 from mapper.StudentRowMapper import StudentRowMapper
 
@@ -16,7 +18,7 @@ class StudentDAOSqliteImpl(StudentDAO):
         constructor
         
         """
-        self.filename = "../dbs/Student.sqlite"
+        self.filename = "dbs/Student.sqlite"
         self.tablename = "Student"
         self.db, self.cursor = None, None
 

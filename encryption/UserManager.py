@@ -14,7 +14,7 @@ class UserManager:
         constructor
 
         """
-        self.filename = "../dbs/User.sqlite"
+        self.filename = "dbs/User.sqlite"
         self.tablename = "User"
         self.db, self.cursor = None, None
         self.hasher = Sha256Hasher()

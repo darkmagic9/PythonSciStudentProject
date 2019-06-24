@@ -44,7 +44,7 @@ class MatplotIntegrationExample(QDialog):
         
         """
         super().__init__()
-        self.left, self.top, self.width, self.height = 10, 10, 700, 500
+        self.left, self.top, self.width, self.height = 50, 50, 700, 500
         self.title = "matplotlib embedded inside pyqt5 "
         self.initGUI()
 

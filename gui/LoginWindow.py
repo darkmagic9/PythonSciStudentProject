@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import QMenuBar, QMenu, QAction
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QAbstractItemView, QFileDialog
 from PyQt5 import QtWidgets
-
+sys.path.append('.')
 from dao.StudentDAOSqliteImpl import StudentDAOSqliteImpl
 from model.Student import Student
 from mapper.StudentListMapper import StudentListMapper
@@ -42,7 +42,7 @@ class LoginWindow(QDialog):
     def __init__(self):
         super().__init__()
         self.title = "Login Window"
-        self.left , self.top, self.width , self.height = 10 , 10, 500, -1
+        self.left , self.top, self.width , self.height = 50 , 50, 500, -1
         self.userManager = UserManager()
         self.hasher = Sha256Hasher()
         # self.data = self.generate_units()
