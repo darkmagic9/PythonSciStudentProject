@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from serializer.StudentCSVSerializer import StudentCSVSerializer
 from model.Student import Student
 

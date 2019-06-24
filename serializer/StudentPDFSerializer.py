@@ -13,7 +13,7 @@ class StudentPDFSerializer:
     """
 
     # table
-    def exportAsPDFToFile(self, students , filename="../files/students.pdf"):
+    def exportAsPDFToFile(self, students , filename="files/students.pdf"):
         """
         Exports students to the PDF file with the given filename.
 
@@ -49,7 +49,7 @@ class StudentPDFSerializer:
 
     # This method was never used.But I did not remove this method for learning purposes
     # for myself.
-    def exportAsPDFToFile_2(self, students , filename="../files/students.pdf"):
+    def exportAsPDFToFile_2(self, students , filename="files/students.pdf"):
         """
         Exports students to the PDF file with the given filename.
 

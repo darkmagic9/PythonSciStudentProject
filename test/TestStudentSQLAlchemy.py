@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from dao.StudentSQLAlchemy import StudentSQLAlchemy, StudentSQLAlchemyDAOImpl
 from model.Student import Student
 import datetime

@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from serializer.StudentJSONSerializer import StudentJSONSerializer
 from model.Student import  Student
 import datetime

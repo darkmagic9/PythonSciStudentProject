@@ -36,7 +36,7 @@ class StudentXMLSerializer:
 
 
 
-    def exportAsXMLToFile(self, students , filename = "../files/students.xml"):
+    def exportAsXMLToFile(self, students , filename = "files/students.xml"):
         """
         Exports students to the XML file with the given filename.
 
@@ -50,7 +50,7 @@ class StudentXMLSerializer:
 
 
 
-    def importFromXML(self, filename = "../files/students.xml" ):
+    def importFromXML(self, filename = "files/students.xml" ):
         """
         Generates list of model.Student.Student-s from XML file with the given filename.
 

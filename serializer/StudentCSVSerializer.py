@@ -8,7 +8,7 @@ class StudentCSVSerializer:
     
     """
 
-    def exportAsCSVToFile(self, students , filename = "../files/students.csv"):
+    def exportAsCSVToFile(self, students , filename = "files/students.csv"):
         """
         Exports students to the CSV file with the given filename.
         
@@ -25,7 +25,7 @@ class StudentCSVSerializer:
 
 
 
-    def importFromCSV(self, filename= "../files/students.csv"):
+    def importFromCSV(self, filename= "files/students.csv"):
         """
         Generates list of model.Student.Student-s from CSV file with the given filename.
         

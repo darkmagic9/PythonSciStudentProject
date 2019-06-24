@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from serializer.StudentXMLSerializer import StudentXMLSerializer
 from model.Student import  Student
 import datetime

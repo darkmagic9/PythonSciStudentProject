@@ -286,7 +286,7 @@ class StudentFindAllWindow(QDialog):
 
 
 
-    def saveFileDialog(self, title, directory = "../files" , fileType = "Text", fileExtension="txt"):
+    def saveFileDialog(self, title, directory = "files" , fileType = "Text", fileExtension="txt"):
         """
         opens Save-Dialog for saving file 
         
@@ -403,7 +403,7 @@ class StudentFindAllWindow(QDialog):
 
 
 
-    def openFileDialog(self, title, directory = "../files", fileType = "Text", fileExtension = "txt"):
+    def openFileDialog(self, title, directory = "files", fileType = "Text", fileExtension = "txt"):
         """
         opens Open-Dialog for choosing a file
         

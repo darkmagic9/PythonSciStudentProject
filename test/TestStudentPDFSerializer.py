@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from serializer.StudentPDFSerializer import StudentPDFSerializer
 from model.Student import Student
 import datetime

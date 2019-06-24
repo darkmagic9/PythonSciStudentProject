@@ -21,7 +21,7 @@ class StudentJSONSerializer:
         return json.dumps(l, indent=4, sort_keys=True)
 
 
-    def exportAsJSONToFile(self, students , filename = "../files/students.json"):
+    def exportAsJSONToFile(self, students , filename = "files/students.json"):
         """
         Exports students to the JSON file with the given filename.
 
@@ -38,7 +38,7 @@ class StudentJSONSerializer:
 
 
 
-    def importFromJSON(self, filename = "../files/students.json" ):
+    def importFromJSON(self, filename = "files/students.json" ):
         """
         Generates list of model.Student.Student-s from JSON file with the given filename.
 

@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from dao.StudentDAOMongoImpl import StudentDAOMongoImpl
 from model.Student import Student
 import datetime
