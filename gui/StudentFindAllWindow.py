@@ -434,7 +434,7 @@ class StudentFindAllWindow(QDialog):
         """
         mainWidget = QDialog()
         mainWidget.setWindowTitle(title)
-        mainWidget.setGeometry(10, 10, 800, 500)
+        mainWidget.setGeometry(50, 50, 800, 500)
         mainWidget.setWindowModality(Qt.WindowModal)
         # set layout
         mainLayout = QVBoxLayout()
