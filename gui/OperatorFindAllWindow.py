@@ -18,24 +18,24 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QAbstractItemView, QFileDialog
 from PyQt5 import QtWidgets
 
-from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
-from model.Student import Student
-from mapper.StudentListMapper import StudentListMapper
-from gui.StudentSaveWindow import StudentSaveWindow
-from gui.StudentUpdateWindow import StudentUpdateWindow
-from gui.StudentDetailsWindow import StudentDetailsWindow
+from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from model.Operator import Operator
+from mapper.OperatorListMapper import OperatorListMapper
+from gui.OperatorSaveWindow import OperatorSaveWindow
+from gui.OperatorUpdateWindow import OperatorUpdateWindow
+from gui.OperatorDetailsWindow import OperatorDetailsWindow
 
-from serializer.StudentXMLSerializer import StudentXMLSerializer
-from serializer.StudentJSONSerializer import StudentJSONSerializer
-from serializer.StudentCSVSerializer import StudentCSVSerializer
-from serializer.StudentPDFSerializer import StudentPDFSerializer
+from serializer.OperatorXMLSerializer import OperatorXMLSerializer
+from serializer.OperatorJSONSerializer import OperatorJSONSerializer
+from serializer.OperatorCSVSerializer import OperatorCSVSerializer
+from serializer.OperatorPDFSerializer import OperatorPDFSerializer
 
 from others.SimpleCalculator import SimpleCalculator
 from others.SimpleConverter import SimpleConverter
 from others.MatplotIntegrationExample import MatplotIntegrationExample
 from others.SimpleTictactoe import SimpleTictactoe
 
-class StudentFindAllWindow(QDialog):
+class OperatorFindAllWindow(QDialog):
     """
     After successful login by user this window is shown. 
 
@@ -46,10 +46,10 @@ class StudentFindAllWindow(QDialog):
         
         """
         super().__init__()
-        self.title = "All Students"
+        self.title = "All Operators"
         self.left , self.top, self.width , self.height = 50 , 50, 900, 500
-        self.dao = StudentDAOPymysqlImpl()
-        self.mapper = StudentListMapper()
+        self.dao = OperatorDAOSqliteImpl()
+        self.mapper = OperatorListMapper()
         self.initGUI()
 
 
@@ -122,13 +122,13 @@ class StudentFindAllWindow(QDialog):
         self.mainMenu = QMenuBar(self)
         self.menuActions = self.mainMenu.addMenu("Actions")
         # actions
-        self.actionSave = QAction("Add New Student...", self)
+        self.actionSave = QAction("Add New Operator...", self)
         self.menuActions.addAction(self.actionSave)
-        self.actionUpdate = QAction("Update the Selected Student...", self)
+        self.actionUpdate = QAction("Update the Selected Operator...", self)
         self.menuActions.addAction(self.actionUpdate)
-        self.actionRemove = QAction("Remove the Selected Student", self)
+        self.actionRemove = QAction("Remove the Selected Operator", self)
         self.menuActions.addAction(self.actionRemove)
-        self.actionDetails = QAction("Details of the Selected Student...", self)
+        self.actionDetails = QAction("Details of the Selected Operator...", self)
         self.menuActions.addAction(self.actionDetails)
 
         # serializers
@@ -203,11 +203,10 @@ class StudentFindAllWindow(QDialog):
         Gets invoked when actionSave is triggered.
         :return: 
         """
-        window = StudentSaveWindow(self.tableWidget)
+        window = OperatorSaveWindow(self.tableWidget)
         window.show()
         window.exec_()
         self.tableWidget.resizeColumnsToContents()
-        self.populateTable()
 
     @pyqtSlot()
     def onActionUpdateTriggered(self):
@@ -225,11 +224,11 @@ class StudentFindAllWindow(QDialog):
         # selectedItems[1].setText("updated firstname")
 
         # print(data)
-        window = StudentUpdateWindow(selectedItems)
+        window = OperatorUpdateWindow(selectedItems)
         window.show()
         window.exec_()
         self.tableWidget.resizeColumnsToContents()
-        self.populateTable()
+
 
 
     @pyqtSlot()
@@ -263,7 +262,7 @@ class StudentFindAllWindow(QDialog):
             return
 
         data = [selectedItem.text() for selectedItem in selectedItems]
-        window = StudentDetailsWindow(data)
+        window = OperatorDetailsWindow(data)
         window.show()
         window.exec_()
 
@@ -318,9 +317,9 @@ class StudentFindAllWindow(QDialog):
         fileName = self.saveFileDialog("Export As XML" , fileType="XML", fileExtension="xml")
         if fileName:
             try:
-                serializer = StudentXMLSerializer()
-                students = self.dao.find_all()
-                serializer.exportAsXMLToFile(students, fileName)
+                serializer = OperatorXMLSerializer()
+                operator = self.dao.find_all()
+                serializer.exportAsXMLToFile(operator, fileName)
                 QMessageBox.information(self, "<<Information>>", "Exported As XML successfully.")
 
             except Exception as err:
@@ -343,9 +342,9 @@ class StudentFindAllWindow(QDialog):
         fileName = self.saveFileDialog("Export As JSON" , fileType="JSON", fileExtension="json")
         if fileName:
             try:
-                serializer = StudentJSONSerializer()
-                students = self.dao.find_all()
-                serializer.exportAsJSONToFile(students, fileName)
+                serializer = OperatorJSONSerializer()
+                operator = self.dao.find_all()
+                serializer.exportAsJSONToFile(operator, fileName)
                 QMessageBox.information(self, "<<Information>>", "Exported As JSON successfully.")
 
             except Exception as err:
@@ -365,9 +364,9 @@ class StudentFindAllWindow(QDialog):
         fileName = self.saveFileDialog("Export As CSV", fileType="CSV", fileExtension="csv")
         if fileName:
             try:
-                serializer = StudentCSVSerializer()
-                students = self.dao.find_all()
-                serializer.exportAsCSVToFile(students, fileName)
+                serializer = OperatorCSVSerializer()
+                operator = self.dao.find_all()
+                serializer.exportAsCSVToFile(operator, fileName)
                 QMessageBox.information(self, "<<Information>>", "Exported As CSV successfully.")
 
             except Exception as err:
@@ -389,9 +388,9 @@ class StudentFindAllWindow(QDialog):
         fileName = self.saveFileDialog("Export As PDF", fileType="PDF", fileExtension="pdf")
         if fileName:
             try:
-                serializer = StudentPDFSerializer()
-                students = self.dao.find_all()
-                serializer.exportAsPDFToFile(students, fileName)
+                serializer = OperatorPDFSerializer()
+                operator = self.dao.find_all()
+                serializer.exportAsPDFToFile(operator, fileName)
                 QMessageBox.information(self, "<<Information>>", "Exported As PDF successfully.")
 
             except Exception as err:
@@ -424,12 +423,12 @@ class StudentFindAllWindow(QDialog):
             return None
 
 
-    def generateWindowWithTableWidget(self, students, title ):
+    def generateWindowWithTableWidget(self, operator, title ):
         """
         generates and show QDialog instance with QTableWidget, which contains 
-        students as its rows
+        operator as its rows
         
-        :param students: list of model.Student.Student - s
+        :param operator: list of model.Operator.Operator - s
         :param title: string 
         :return: 
         """
@@ -445,27 +444,27 @@ class StudentFindAllWindow(QDialog):
         lblTitle = QLabel(title)
         mainLayout.addWidget(lblTitle)
         # table widget
-        tableStudents = QTableWidget()
-        tableStudents.setRowCount(len(students))
-        tableStudents.setColumnCount(6)
+        tableOperators = QTableWidget()
+        tableOperators.setRowCount(len(operator))
+        tableOperators.setColumnCount(6)
 
-        for i, student in enumerate(students):
+        for i, student in enumerate(operator):
             # print(type(student))
             l = self.mapper.map_to_list(student)
-            tableStudents.setItem(i, 0, QTableWidgetItem(l[0]))
-            tableStudents.setItem(i, 1, QTableWidgetItem(l[1]))
-            tableStudents.setItem(i, 2, QTableWidgetItem(l[2]))
-            tableStudents.setItem(i, 3, QTableWidgetItem(l[3]))
-            tableStudents.setItem(i, 4, QTableWidgetItem(l[4]))
-            tableStudents.setItem(i, 5, QTableWidgetItem(l[5]))
+            tableOperators.setItem(i, 0, QTableWidgetItem(l[0]))
+            tableOperators.setItem(i, 1, QTableWidgetItem(l[1]))
+            tableOperators.setItem(i, 2, QTableWidgetItem(l[2]))
+            tableOperators.setItem(i, 3, QTableWidgetItem(l[3]))
+            tableOperators.setItem(i, 4, QTableWidgetItem(l[4]))
+            tableOperators.setItem(i, 5, QTableWidgetItem(l[5]))
 
 
 
-        tableStudents.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
+        tableOperators.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
                                                     "Faculty", "Email"])
-        tableStudents.resizeColumnsToContents()
+        tableOperators.resizeColumnsToContents()
 
-        mainLayout.addWidget(tableStudents)
+        mainLayout.addWidget(tableOperators)
         mainWidget.show()
         mainWidget.exec_()
 
@@ -480,10 +479,10 @@ class StudentFindAllWindow(QDialog):
         """
         fileName = self.openFileDialog("Import From XML", fileType="XML", fileExtension="xml")
         if fileName:
-            serializer = StudentXMLSerializer()
-            students = serializer.importFromXML(fileName)
-            # print(students)
-            self.generateWindowWithTableWidget(students, "Import From XML")
+            serializer = OperatorXMLSerializer()
+            operator = serializer.importFromXML(fileName)
+            # print(operator)
+            self.generateWindowWithTableWidget(operator, "Import From XML")
         else:
             QMessageBox.critical(self, "<<Error>>", "No fileName was given.")
 
@@ -496,10 +495,10 @@ class StudentFindAllWindow(QDialog):
         """
         fileName = self.openFileDialog("Import From JSON", fileType="JSON", fileExtension="json")
         if fileName:
-            serializer = StudentJSONSerializer()
-            students = serializer.importFromJSON(fileName)
-            # print(students)
-            self.generateWindowWithTableWidget(students, "Import From JSON")
+            serializer = OperatorJSONSerializer()
+            operator = serializer.importFromJSON(fileName)
+            # print(operator)
+            self.generateWindowWithTableWidget(operator, "Import From JSON")
         else:
             QMessageBox.critical(self, "<<Error>>", "No fileName was given.")
 
@@ -507,10 +506,10 @@ class StudentFindAllWindow(QDialog):
     def onActionImportFromCSVTriggered(self):
         fileName = self.openFileDialog("Import From CSV", fileType="CSV", fileExtension="csv")
         if fileName:
-            serializer = StudentCSVSerializer()
-            students = serializer.importFromCSV(fileName)
-            # print(students)
-            self.generateWindowWithTableWidget(students, "Import From CSV")
+            serializer = OperatorCSVSerializer()
+            operator = serializer.importFromCSV(fileName)
+            # print(operator)
+            self.generateWindowWithTableWidget(operator, "Import From CSV")
         else:
             QMessageBox.critical(self, "<<Error>>", "No fileName was given.")
 

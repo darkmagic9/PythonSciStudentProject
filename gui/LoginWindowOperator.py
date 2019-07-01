@@ -18,21 +18,21 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QAbstractItemView, QFileDialog
 from PyQt5 import QtWidgets
 sys.path.append('.')
-from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
-from model.Student import Student
-from mapper.StudentListMapper import StudentListMapper
-from gui.StudentSaveWindow import StudentSaveWindow
-from gui.StudentUpdateWindow import StudentUpdateWindow
-from gui.StudentDetailsWindow import StudentDetailsWindow
+from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from model.Operator import Operator
+from mapper.OperatorListMapper import OperatorListMapper
+from gui.OperatorSaveWindow import OperatorSaveWindow
+from gui.OperatorUpdateWindow import OperatorUpdateWindow
+from gui.OperatorDetailsWindow import OperatorDetailsWindow
 
-from serializer.StudentXMLSerializer import StudentXMLSerializer
-from serializer.StudentJSONSerializer import StudentJSONSerializer
-from serializer.StudentCSVSerializer import StudentCSVSerializer
-from serializer.StudentPDFSerializer import StudentPDFSerializer
+from serializer.OperatorXMLSerializer import OperatorXMLSerializer
+from serializer.OperatorJSONSerializer import OperatorJSONSerializer
+from serializer.OperatorCSVSerializer import OperatorCSVSerializer
+from serializer.OperatorPDFSerializer import OperatorPDFSerializer
 
 from PyQt5 import QtGui
 
-from gui.StudentFindAllWindow import StudentFindAllWindow
+from gui.OperatorFindAllWindow import OperatorFindAllWindow
 from others.SimpleConverter import SimpleConverter
 from encryption.UserManager import UserManager
 from encryption.User import User
@@ -98,7 +98,7 @@ class LoginWindow(QDialog):
             if not(self.checkIfUserExists(username, password)):
                 raise Exception("Username or Password was not correct.")
 
-            window = StudentFindAllWindow()
+            window = OperatorFindAllWindow()
             self.hide()
             window.show()
             window.exec_()

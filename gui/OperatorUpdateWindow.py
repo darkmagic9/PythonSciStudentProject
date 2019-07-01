@@ -13,15 +13,15 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
 
-from validator.StudentValidator import StudentValidator
-from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
-from model.Student import Student
+from validator.OperatorValidator import OperatorValidator
+from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from model.Operator import Operator
 
 
 
-class StudentUpdateWindow(QDialog):
+class OperatorUpdateWindow(QDialog):
     """
-    With this class QDialog for updating the selected model.Student into database 
+    With this class QDialog for updating the selected model.Operator into database 
     is shown.
 
     """
@@ -34,10 +34,10 @@ class StudentUpdateWindow(QDialog):
         """
         super().__init__()
         self.selectedItems = selectedItems
-        self.title = "Update The Selected Student"
+        self.title = "Update The Selected Operator"
         self.left , self.top , self.width , self.height = 50, 50, 500, 500
-        self.validator = StudentValidator()
-        self.dao = StudentDAOPymysqlImpl()
+        self.validator = OperatorValidator()
+        self.dao = OperatorDAOSqliteImpl()
         self.initGUI()
         self.setWindowModality(Qt.ApplicationModal)
 
@@ -62,7 +62,7 @@ class StudentUpdateWindow(QDialog):
         self.mainLayout = QFormLayout()
         self.setLayout(self.mainLayout)
         # title
-        self.lblTitle = QLabel("Update The Selected Student")
+        self.lblTitle = QLabel("Update The Selected Operator")
         self.lblEmpty = QLabel()
 
         # enrolmentNumber
@@ -162,16 +162,16 @@ class StudentUpdateWindow(QDialog):
                 raise Exception("\n".join(errors))
 
 
-            self.dao.update(enrolmentNumber, Student(enrolmentNumber, firstName, lastName,
+            self.dao.update(enrolmentNumber, Operator(enrolmentNumber, firstName, lastName,
                                   dob, faculty, email))
 
 
-            # self.selectedItems[0].setText(enrolmentNumber)
-            # self.selectedItems[1].setText(firstName)
-            # self.selectedItems[2].setText(lastName)
-            # self.selectedItems[3].setText(dob)
-            # self.selectedItems[4].setText(faculty)
-            # self.selectedItems[5].setText(email)
+            self.selectedItems[0].setText(enrolmentNumber)
+            self.selectedItems[1].setText(firstName)
+            self.selectedItems[2].setText(lastName)
+            self.selectedItems[3].setText(dob)
+            self.selectedItems[4].setText(faculty)
+            self.selectedItems[5].setText(email)
 
             self.close()
 

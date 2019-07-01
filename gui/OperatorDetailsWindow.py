@@ -13,29 +13,29 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
 
-from validator.StudentValidator import StudentValidator
-from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
-from model.Student import Student
+from validator.OperatorValidator import OperatorValidator
+from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from model.Operator import Operator
 
 
 
-class StudentDetailsWindow(QDialog):
+class OperatorDetailsWindow(QDialog):
     """
-    With this class the details of one selected Student is shown.
+    With this class the details of one selected Operator is shown.
     
     """
 
     def __init__(self, data):
         """
         constructor 
-        :param data: list of Student properties as string  
+        :param data: list of Operator properties as string  
         """
         super().__init__()
         self.data = data
-        self.title = "Student Details"
+        self.title = "Operator Details"
         self.left , self.top , self.width , self.height = 50, 50, 500, 500
-        self.validator = StudentValidator()
-        self.dao = StudentDAOPymysqlImpl()
+        self.validator = OperatorValidator()
+        self.dao = OperatorDAOSqliteImpl()
         self.initGUI()
 
 
@@ -62,7 +62,7 @@ class StudentDetailsWindow(QDialog):
         self.mainLayout = QFormLayout()
         self.setLayout(self.mainLayout)
         # title
-        self.lblTitle = QLabel("Student Details")
+        self.lblTitle = QLabel("Operator Details")
         self.lblEmpty = QLabel()
 
         # enrolmentNumber

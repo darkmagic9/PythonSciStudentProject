@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
 
 from validator.StudentValidator import StudentValidator
-from dao.StudentDAOSqliteImpl import StudentDAOSqliteImpl
+from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
 from model.Student import Student
 
 
@@ -35,7 +35,7 @@ class StudentSaveWindow(QDialog):
         self.title = "Save New Student"
         self.left , self.top , self.width , self.height = 50, 50, 500, 500
         self.validator = StudentValidator()
-        self.dao = StudentDAOSqliteImpl()
+        self.dao = StudentDAOPymysqlImpl()
         self.initGUI()
 
 
@@ -66,8 +66,8 @@ class StudentSaveWindow(QDialog):
         self.lblEmpty = QLabel()
 
         # enrolmentNumber
-        self.lblEnrolmentNumber = QLabel("EnrolmentNumber: ")
-        self.editEnrolmentNumber = QLineEdit()
+        # self.lblEnrolmentNumber = QLabel("EnrolmentNumber: ")
+        # self.editEnrolmentNumber = QLineEdit()
 
         # firstName
         self.lblFirstName = QLabel("FirstName: ")
@@ -96,7 +96,7 @@ class StudentSaveWindow(QDialog):
 
         # add all rows to mainLayout
         self.mainLayout.addRow(self.lblEmpty, self.lblTitle)
-        self.mainLayout.addRow(self.lblEnrolmentNumber, self.editEnrolmentNumber)
+        # self.mainLayout.addRow(self.lblEnrolmentNumber, self.editEnrolmentNumber)
         self.mainLayout.addRow(self.lblFirstName, self.editFirstName)
         self.mainLayout.addRow(self.lblLastName, self.editLastName)
         self.mainLayout.addRow(self.lblDob, self.editDob)
@@ -124,14 +124,14 @@ class StudentSaveWindow(QDialog):
         """
         try:
             errors = []
-            enrolmentNumber = self.editEnrolmentNumber.text()
+            enrolmentNumber = 0
             firstName = self.editFirstName.text()
             lastName = self.editLastName.text()
             dob = self.editDob.text()
             faculty = self.editFaculty.text()
             email = self.editEmail.text()
-            if not self.validator.validateEnrolmentNumber(enrolmentNumber):
-                errors.append("enrolmentNumber is incorrect.")
+            # if not self.validator.validateEnrolmentNumber(enrolmentNumber):
+            #     errors.append("enrolmentNumber is incorrect.")
 
             if not self.validator.validateFirstName(firstName):
                 errors.append("firstName is incorrect.")
@@ -159,14 +159,14 @@ class StudentSaveWindow(QDialog):
                 raise Exception(ret)
 
 
-            rowPosition = self.tableWidget.rowCount()
-            self.tableWidget.insertRow(rowPosition)
-            self.tableWidget.setItem(rowPosition, 0, QTableWidgetItem(enrolmentNumber))
-            self.tableWidget.setItem(rowPosition, 1, QTableWidgetItem(firstName))
-            self.tableWidget.setItem(rowPosition, 2, QTableWidgetItem(lastName))
-            self.tableWidget.setItem(rowPosition, 3, QTableWidgetItem(dob))
-            self.tableWidget.setItem(rowPosition, 4, QTableWidgetItem(faculty))
-            self.tableWidget.setItem(rowPosition, 5, QTableWidgetItem(email))
+            # rowPosition = self.tableWidget.rowCount()
+            # self.tableWidget.insertRow(rowPosition)
+            # self.tableWidget.setItem(rowPosition, 0, QTableWidgetItem(enrolmentNumber))
+            # self.tableWidget.setItem(rowPosition, 1, QTableWidgetItem(firstName))
+            # self.tableWidget.setItem(rowPosition, 2, QTableWidgetItem(lastName))
+            # self.tableWidget.setItem(rowPosition, 3, QTableWidgetItem(dob))
+            # self.tableWidget.setItem(rowPosition, 4, QTableWidgetItem(faculty))
+            # self.tableWidget.setItem(rowPosition, 5, QTableWidgetItem(email))
 
             self.close()
 

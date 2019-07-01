@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication , QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication , QWidget, QPushButton, QTableWidgetItem
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QHBoxLayout, QGroupBox , QDialog, QVBoxLayout, QGridLayout
@@ -13,33 +13,31 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
 
-from validator.StudentValidator import StudentValidator
-from dao.StudentDAOPymysqlImpl import StudentDAOPymysqlImpl
-from model.Student import Student
+from validator.OperatorValidator import OperatorValidator
+from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from model.Operator import Operator
 
 
 
-class StudentUpdateWindow(QDialog):
+class OperatorSaveWindow(QDialog):
     """
-    With this class QDialog for updating the selected model.Student into database 
-    is shown.
-
+    With this class QDialog for adding new model.Operator into database is shown.
+     
     """
-
-    def __init__(self, selectedItems):
+    def __init__(self, tableWidget):
         """
         constructor 
         
-        :param selectedItems:list of QTableWidget-s  
+        :param tableWidget: QTableWidget 
         """
         super().__init__()
-        self.selectedItems = selectedItems
-        self.title = "Update The Selected Student"
+        self.tableWidget = tableWidget
+        self.title = "Save New Operator"
         self.left , self.top , self.width , self.height = 50, 50, 500, 500
-        self.validator = StudentValidator()
-        self.dao = StudentDAOPymysqlImpl()
+        self.validator = OperatorValidator()
+        self.dao = OperatorDAOSqliteImpl()
         self.initGUI()
-        self.setWindowModality(Qt.ApplicationModal)
+
 
 
     def initGUI(self):
@@ -49,8 +47,10 @@ class StudentUpdateWindow(QDialog):
         """
         self.setWindowTitle(self.title)
         self.setGeometry(self.left , self.top, self.width , self.height)
+        self.setWindowModality(Qt.ApplicationModal)
         self.addComponents()
         self.registerEvents()
+
 
 
 
@@ -62,7 +62,7 @@ class StudentUpdateWindow(QDialog):
         self.mainLayout = QFormLayout()
         self.setLayout(self.mainLayout)
         # title
-        self.lblTitle = QLabel("Update The Selected Student")
+        self.lblTitle = QLabel("Save New Operator")
         self.lblEmpty = QLabel()
 
         # enrolmentNumber
@@ -91,7 +91,7 @@ class StudentUpdateWindow(QDialog):
         self.editEmail = QLineEdit()
 
         # buttons
-        self.btnUpdate = QPushButton("Update")
+        self.btnSave = QPushButton("Save")
         self.btnCancel = QPushButton("Cancel")
 
         # add all rows to mainLayout
@@ -102,34 +102,24 @@ class StudentUpdateWindow(QDialog):
         self.mainLayout.addRow(self.lblDob, self.editDob)
         self.mainLayout.addRow(self.lblFaculty, self.editFaculty)
         self.mainLayout.addRow(self.lblEmail, self.editEmail)
-        self.mainLayout.addRow(self.btnUpdate, self.btnCancel)
-
-        data = [selectedItem.text() for selectedItem in self.selectedItems]
-        self.editEnrolmentNumber.setText(data[0])
-        self.editFirstName.setText(data[1])
-        self.editLastName.setText(data[2])
-        self.editDob.setText(data[3])
-        self.editFaculty.setText(data[4])
-        self.editEmail.setText(data[5])
-        self.editEnrolmentNumber.setReadOnly(True)
-
+        self.mainLayout.addRow(self.btnSave, self.btnCancel)
 
     def registerEvents(self):
         """
         registers events
         :return: 
         """
-        self.btnUpdate.clicked.connect(self.onBtnUpdateClicked)
+        self.btnSave.clicked.connect(self.onBtnSaveClicked)
         self.btnCancel.clicked.connect(self.onBtnCancelClicked)
 
 
 
 
     @pyqtSlot()
-    def onBtnUpdateClicked(self):
+    def onBtnSaveClicked(self):
         """
         Slot for signal-slot handling .
-        Gets invoked when btnUpdate is clicked.
+        Gets invoked when btnSave is clicked.
         :return: 
         """
         try:
@@ -162,20 +152,26 @@ class StudentUpdateWindow(QDialog):
                 raise Exception("\n".join(errors))
 
 
-            self.dao.update(enrolmentNumber, Student(enrolmentNumber, firstName, lastName,
+            ret = self.dao.save(Operator(enrolmentNumber, firstName, lastName,
                                   dob, faculty, email))
 
+            if ret :
+                raise Exception(ret)
 
-            # self.selectedItems[0].setText(enrolmentNumber)
-            # self.selectedItems[1].setText(firstName)
-            # self.selectedItems[2].setText(lastName)
-            # self.selectedItems[3].setText(dob)
-            # self.selectedItems[4].setText(faculty)
-            # self.selectedItems[5].setText(email)
+
+            rowPosition = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(rowPosition)
+            self.tableWidget.setItem(rowPosition, 0, QTableWidgetItem(enrolmentNumber))
+            self.tableWidget.setItem(rowPosition, 1, QTableWidgetItem(firstName))
+            self.tableWidget.setItem(rowPosition, 2, QTableWidgetItem(lastName))
+            self.tableWidget.setItem(rowPosition, 3, QTableWidgetItem(dob))
+            self.tableWidget.setItem(rowPosition, 4, QTableWidgetItem(faculty))
+            self.tableWidget.setItem(rowPosition, 5, QTableWidgetItem(email))
 
             self.close()
 
         except Exception as err:
+
             QMessageBox.critical(self, "<<Error>>", str(err))
 
 
