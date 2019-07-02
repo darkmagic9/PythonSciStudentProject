@@ -74,7 +74,14 @@ class OperatorFindAllWindow(QDialog):
         """
         data = self.dao.find_all()
         self.tableWidget.setRowCount(len(data))
+        self.tableWidget.setAlternatingRowColors(True)
         self.tableWidget.setColumnCount(6)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setVisible(False)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
 
         for i, student in enumerate(data):
             # print(type(student))
@@ -88,7 +95,7 @@ class OperatorFindAllWindow(QDialog):
 
         self.tableWidget.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
                                                     "Faculty", "Email"])
-        self.tableWidget.resizeColumnsToContents()
+        # self.tableWidget.resizeColumnsToContents()
 
 
     def addComponents(self):
@@ -103,23 +110,10 @@ class OperatorFindAllWindow(QDialog):
         # self.mainWidget.setLayout(self.mainLayout)
         # self.mainWidget.setGeometry(self.left, self.top, self.width, self.height)
         self.setLayout(self.mainLayout)
-        # table widget
-        self.tableWidget = QTableWidget()
-
-        self.mainLayout.addWidget(self.tableWidget)
-
-        self.tableWidget.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-
-        self.populateTable()
-
-
-        # self.tableWidget.setSelectionModel(QItemSelectionModel.Rows)
-        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
-
-
+        
         self.mainMenu = QMenuBar(self)
+        self.mainLayout.addWidget(self.mainMenu)
+        
         self.menuActions = self.mainMenu.addMenu("Actions")
         # actions
         self.actionSave = QAction("Add New Operator...", self)
@@ -165,6 +159,22 @@ class OperatorFindAllWindow(QDialog):
         self.menuOthers.addAction(self.actionMatplotIntegrationExample)
         self.menuOthers.addAction(self.actionSimpleTictactoe)
 
+        # table widget
+        self.tableWidget = QTableWidget()
+
+        self.mainLayout.addWidget(self.tableWidget)
+
+        self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+
+        self.populateTable()
+        self.tableWidget.resizeColumnsToContents()
+
+
+        # self.tableWidget.setSelectionModel(QItemSelectionModel.Rows)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
+
+
 
         # Sync button
         self.btnSync = QPushButton("Synchronize table content with database.")
@@ -206,7 +216,8 @@ class OperatorFindAllWindow(QDialog):
         window = OperatorSaveWindow(self.tableWidget)
         window.show()
         window.exec_()
-        self.tableWidget.resizeColumnsToContents()
+        # self.tableWidget.resizeColumnsToContents()
+        self.populateTable()
 
     @pyqtSlot()
     def onActionUpdateTriggered(self):
@@ -227,8 +238,8 @@ class OperatorFindAllWindow(QDialog):
         window = OperatorUpdateWindow(selectedItems)
         window.show()
         window.exec_()
-        self.tableWidget.resizeColumnsToContents()
-
+        # self.tableWidget.resizeColumnsToContents()
+        self.populateTable()
 
 
     @pyqtSlot()
@@ -319,7 +330,7 @@ class OperatorFindAllWindow(QDialog):
             try:
                 serializer = OperatorXMLSerializer()
                 operator = self.dao.find_all()
-                serializer.exportAsXMLToFile(operator, fileName)
+                serializer.exportAsXMLToFile(operator, fileName+'.xml')
                 QMessageBox.information(self, "<<Information>>", "Exported As XML successfully.")
 
             except Exception as err:
@@ -344,7 +355,7 @@ class OperatorFindAllWindow(QDialog):
             try:
                 serializer = OperatorJSONSerializer()
                 operator = self.dao.find_all()
-                serializer.exportAsJSONToFile(operator, fileName)
+                serializer.exportAsJSONToFile(operator, fileName+'.json')
                 QMessageBox.information(self, "<<Information>>", "Exported As JSON successfully.")
 
             except Exception as err:
@@ -366,7 +377,7 @@ class OperatorFindAllWindow(QDialog):
             try:
                 serializer = OperatorCSVSerializer()
                 operator = self.dao.find_all()
-                serializer.exportAsCSVToFile(operator, fileName)
+                serializer.exportAsCSVToFile(operator, fileName+'.csv')
                 QMessageBox.information(self, "<<Information>>", "Exported As CSV successfully.")
 
             except Exception as err:
@@ -390,7 +401,7 @@ class OperatorFindAllWindow(QDialog):
             try:
                 serializer = OperatorPDFSerializer()
                 operator = self.dao.find_all()
-                serializer.exportAsPDFToFile(operator, fileName)
+                serializer.exportAsPDFToFile(operator, fileName+'.pdf')
                 QMessageBox.information(self, "<<Information>>", "Exported As PDF successfully.")
 
             except Exception as err:
@@ -446,7 +457,15 @@ class OperatorFindAllWindow(QDialog):
         # table widget
         tableOperators = QTableWidget()
         tableOperators.setRowCount(len(operator))
-        tableOperators.setColumnCount(6)
+        tableStudents.setAlternatingRowColors(True)
+        tableStudents.setColumnCount(6)
+        tableStudents.horizontalHeader().setCascadingSectionResizes(False)
+        tableStudents.horizontalHeader().setSortIndicatorShown(False)
+        tableStudents.horizontalHeader().setStretchLastSection(True)
+        tableStudents.verticalHeader().setVisible(False)
+        tableStudents.verticalHeader().setCascadingSectionResizes(False)
+        tableStudents.verticalHeader().setStretchLastSection(False)
+
 
         for i, student in enumerate(operator):
             # print(type(student))

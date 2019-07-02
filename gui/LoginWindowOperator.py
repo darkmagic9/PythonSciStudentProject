@@ -61,7 +61,7 @@ class LoginWindow(QDialog):
         self.setLayout(self.mainLayout)
 
         # title
-        self.lblTitle = QLabel("Login Window")
+        self.lblTitle = QLabel("Login Operator Window")
         self.mainLayout.addRow(QLabel(), self.lblTitle)
         # username
         self.lblUsername = QLabel("Username: ")
