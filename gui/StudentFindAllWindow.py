@@ -74,7 +74,14 @@ class StudentFindAllWindow(QDialog):
         """
         data = self.dao.find_all()
         self.tableWidget.setRowCount(len(data))
+        self.tableWidget.setAlternatingRowColors(True)
         self.tableWidget.setColumnCount(6)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setVisible(False)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
 
         for i, student in enumerate(data):
             # print(type(student))
@@ -88,7 +95,7 @@ class StudentFindAllWindow(QDialog):
 
         self.tableWidget.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
                                                     "Faculty", "Email"])
-        self.tableWidget.resizeColumnsToContents()
+        # self.tableWidget.resizeColumnsToContents()
 
 
     def addComponents(self):
@@ -103,23 +110,10 @@ class StudentFindAllWindow(QDialog):
         # self.mainWidget.setLayout(self.mainLayout)
         # self.mainWidget.setGeometry(self.left, self.top, self.width, self.height)
         self.setLayout(self.mainLayout)
-        # table widget
-        self.tableWidget = QTableWidget()
-
-        self.mainLayout.addWidget(self.tableWidget)
-
-        self.tableWidget.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-
-        self.populateTable()
-
-
-        # self.tableWidget.setSelectionModel(QItemSelectionModel.Rows)
-        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
-
 
         self.mainMenu = QMenuBar(self)
+        self.mainLayout.addWidget(self.mainMenu)
+        
         self.menuActions = self.mainMenu.addMenu("Actions")
         # actions
         self.actionSave = QAction("Add New Student...", self)
@@ -165,6 +159,22 @@ class StudentFindAllWindow(QDialog):
         self.menuOthers.addAction(self.actionMatplotIntegrationExample)
         self.menuOthers.addAction(self.actionSimpleTictactoe)
 
+        # table widget
+        self.tableWidget = QTableWidget()
+
+        self.mainLayout.addWidget(self.tableWidget)
+
+        self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+
+        self.populateTable()
+        self.tableWidget.resizeColumnsToContents()
+
+
+        # self.tableWidget.setSelectionModel(QItemSelectionModel.Rows)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
+
+
 
         # Sync button
         self.btnSync = QPushButton("Synchronize table content with database.")
@@ -206,7 +216,7 @@ class StudentFindAllWindow(QDialog):
         window = StudentSaveWindow(self.tableWidget)
         window.show()
         window.exec_()
-        self.tableWidget.resizeColumnsToContents()
+        # self.tableWidget.resizeColumnsToContents()
         self.populateTable()
 
     @pyqtSlot()
@@ -228,7 +238,7 @@ class StudentFindAllWindow(QDialog):
         window = StudentUpdateWindow(selectedItems)
         window.show()
         window.exec_()
-        self.tableWidget.resizeColumnsToContents()
+        # self.tableWidget.resizeColumnsToContents()
         self.populateTable()
 
 
@@ -447,7 +457,14 @@ class StudentFindAllWindow(QDialog):
         # table widget
         tableStudents = QTableWidget()
         tableStudents.setRowCount(len(students))
-        tableStudents.setColumnCount(6)
+        self.tableWidget.setAlternatingRowColors(True)
+        self.tableWidget.setColumnCount(6)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setVisible(False)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
 
         for i, student in enumerate(students):
             # print(type(student))
