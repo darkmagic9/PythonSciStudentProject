@@ -330,7 +330,7 @@ class StudentFindAllWindow(QDialog):
             try:
                 serializer = StudentXMLSerializer()
                 students = self.dao.find_all()
-                serializer.exportAsXMLToFile(students, fileName)
+                serializer.exportAsXMLToFile(students, fileName+'.xml')
                 QMessageBox.information(self, "<<Information>>", "Exported As XML successfully.")
 
             except Exception as err:
@@ -355,7 +355,7 @@ class StudentFindAllWindow(QDialog):
             try:
                 serializer = StudentJSONSerializer()
                 students = self.dao.find_all()
-                serializer.exportAsJSONToFile(students, fileName)
+                serializer.exportAsJSONToFile(students, fileName+'.json')
                 QMessageBox.information(self, "<<Information>>", "Exported As JSON successfully.")
 
             except Exception as err:
@@ -377,7 +377,7 @@ class StudentFindAllWindow(QDialog):
             try:
                 serializer = StudentCSVSerializer()
                 students = self.dao.find_all()
-                serializer.exportAsCSVToFile(students, fileName)
+                serializer.exportAsCSVToFile(students, fileName+'.csv')
                 QMessageBox.information(self, "<<Information>>", "Exported As CSV successfully.")
 
             except Exception as err:
@@ -401,7 +401,7 @@ class StudentFindAllWindow(QDialog):
             try:
                 serializer = StudentPDFSerializer()
                 students = self.dao.find_all()
-                serializer.exportAsPDFToFile(students, fileName)
+                serializer.exportAsPDFToFile(students, fileName+'.pdf')
                 QMessageBox.information(self, "<<Information>>", "Exported As PDF successfully.")
 
             except Exception as err:
@@ -457,14 +457,15 @@ class StudentFindAllWindow(QDialog):
         # table widget
         tableStudents = QTableWidget()
         tableStudents.setRowCount(len(students))
-        self.tableWidget.setAlternatingRowColors(True)
-        self.tableWidget.setColumnCount(6)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget.verticalHeader().setVisible(False)
-        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.verticalHeader().setStretchLastSection(False)
+        tableStudents.setAlternatingRowColors(True)
+        tableStudents.setColumnCount(6)
+        tableStudents.horizontalHeader().setCascadingSectionResizes(False)
+        tableStudents.horizontalHeader().setSortIndicatorShown(False)
+        tableStudents.horizontalHeader().setStretchLastSection(True)
+        tableStudents.verticalHeader().setVisible(False)
+        tableStudents.verticalHeader().setCascadingSectionResizes(False)
+        tableStudents.verticalHeader().setStretchLastSection(False)
+
 
         for i, student in enumerate(students):
             # print(type(student))
