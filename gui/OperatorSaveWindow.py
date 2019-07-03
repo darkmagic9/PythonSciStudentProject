@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QHBoxLayout, QGroupBox , QDialog, QVBoxLayout, QGridLayout
 from PyQt5.QtWidgets import QLabel, QTextEdit
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QComboBox
 from PyQt5.QtWidgets import QFormLayout, QLineEdit
 
 from PyQt5.QtWidgets import QSizePolicy, QMainWindow
@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
 
 from validator.OperatorValidator import OperatorValidator
-from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from dao.OperatorDAOPymysqlImpl import OperatorDAOPymysqlImpl
 from model.Operator import Operator
 
 
@@ -35,7 +35,7 @@ class OperatorSaveWindow(QDialog):
         self.title = "Save New Operator"
         self.left , self.top , self.width , self.height = 50, 50, 500, 500
         self.validator = OperatorValidator()
-        self.dao = OperatorDAOSqliteImpl()
+        self.dao = OperatorDAOPymysqlImpl()
         self.initGUI()
 
 
@@ -46,7 +46,7 @@ class OperatorSaveWindow(QDialog):
         :return: 
         """
         self.setWindowTitle(self.title)
-        self.setGeometry(self.left , self.top, self.width , self.height)
+        self.setGeometry(self.left*2 , self.top*2, self.width , self.height/2.2)
         self.setWindowModality(Qt.ApplicationModal)
         self.addComponents()
         self.registerEvents()
@@ -65,30 +65,28 @@ class OperatorSaveWindow(QDialog):
         self.lblTitle = QLabel("Save New Operator")
         self.lblEmpty = QLabel()
 
-        # enrolmentNumber
-        self.lblEnrolmentNumber = QLabel("EnrolmentNumber: ")
-        self.editEnrolmentNumber = QLineEdit()
-
-        # firstName
-        self.lblFirstName = QLabel("FirstName: ")
-        self.editFirstName = QLineEdit()
+        # code
+        self.lblCode = QLabel("Code: ")
+        self.editCode = QLineEdit()
+        self.editCode.setPlaceholderText("Code")
+        self.editCode.setInputMask('99999')
 
 
-        # lastName
-        self.lblLastName = QLabel("LastName: ")
-        self.editLastName = QLineEdit()
+        # name
+        self.lblName = QLabel("Name: ")
+        self.editName = QLineEdit()
+        self.editName.setPlaceholderText("Name")
 
-        # dob
-        self.lblDob = QLabel("DateOfBirth: ")
-        self.editDob = QLineEdit()
+        # validation
+        self.lblValidation = QLabel("Validation: ")
+        self.editValidation = QComboBox()
+        self.editValidation.addItem("N")
+        self.editValidation.addItem("Y")
 
-        # faculty
-        self.lblFaculty = QLabel("Faculty: ")
-        self.editFaculty = QLineEdit()
-
-        # email
-        self.lblEmail = QLabel("Email: ")
-        self.editEmail = QLineEdit()
+        # remark
+        self.lblRemark = QLabel("Remark: ")
+        self.editRemark = QLineEdit()
+        self.editRemark.setPlaceholderText("Remark")
 
         # buttons
         self.btnSave = QPushButton("Save")
@@ -96,12 +94,10 @@ class OperatorSaveWindow(QDialog):
 
         # add all rows to mainLayout
         self.mainLayout.addRow(self.lblEmpty, self.lblTitle)
-        self.mainLayout.addRow(self.lblEnrolmentNumber, self.editEnrolmentNumber)
-        self.mainLayout.addRow(self.lblFirstName, self.editFirstName)
-        self.mainLayout.addRow(self.lblLastName, self.editLastName)
-        self.mainLayout.addRow(self.lblDob, self.editDob)
-        self.mainLayout.addRow(self.lblFaculty, self.editFaculty)
-        self.mainLayout.addRow(self.lblEmail, self.editEmail)
+        self.mainLayout.addRow(self.lblCode, self.editCode)
+        self.mainLayout.addRow(self.lblName, self.editName)
+        self.mainLayout.addRow(self.lblValidation, self.editValidation)
+        self.mainLayout.addRow(self.lblRemark, self.editRemark)
         self.mainLayout.addRow(self.btnSave, self.btnCancel)
 
     def registerEvents(self):
@@ -124,36 +120,29 @@ class OperatorSaveWindow(QDialog):
         """
         try:
             errors = []
-            enrolmentNumber = self.editEnrolmentNumber.text()
-            firstName = self.editFirstName.text()
-            lastName = self.editLastName.text()
-            dob = self.editDob.text()
-            faculty = self.editFaculty.text()
-            email = self.editEmail.text()
-            if not self.validator.validateEnrolmentNumber(enrolmentNumber):
-                errors.append("enrolmentNumber is incorrect.")
+            code = self.editCode.text()
+            name = self.editName.text()
+            validation = self.editValidation.itemText(self.editValidation.currentIndex())
+            remark = self.editRemark.text()
 
-            if not self.validator.validateFirstName(firstName):
-                errors.append("firstName is incorrect.")
+            if not self.validator.validateCode(code):
+                errors.append("code is incorrect.")
 
-            if not self.validator.validateLastName(lastName):
-                errors.append("lastName is incorrect.")
+            if not self.validator.validateName(name):
+                errors.append("name is incorrect.")
 
-            if not self.validator.validateDob(dob):
-                errors.append("DateOfBirth is incorrect.")
+            if not self.validator.validateValidation(validation):
+                errors.append("Validation is incorrect.")
 
-            if not self.validator.validateFaculty(faculty):
-                errors.append("Faculty is incorrect.")
-
-            if not self.validator.validateEmail(email):
-                errors.append("Email is incorrect.")
+            if not self.validator.validateRemark(remark):
+                errors.append("Remark is incorrect.")
 
             if len(errors) > 0 :
                 raise Exception("\n".join(errors))
 
 
-            ret = self.dao.save(Operator(enrolmentNumber, firstName, lastName,
-                                  dob, faculty, email))
+            ret = self.dao.save(Operator(0, "", "", "", "", "", "", "", "", code, name,
+                                  validation, remark))
 
             if ret :
                 raise Exception(ret)
@@ -161,12 +150,10 @@ class OperatorSaveWindow(QDialog):
 
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
-            self.tableWidget.setItem(rowPosition, 0, QTableWidgetItem(enrolmentNumber))
-            self.tableWidget.setItem(rowPosition, 1, QTableWidgetItem(firstName))
-            self.tableWidget.setItem(rowPosition, 2, QTableWidgetItem(lastName))
-            self.tableWidget.setItem(rowPosition, 3, QTableWidgetItem(dob))
-            self.tableWidget.setItem(rowPosition, 4, QTableWidgetItem(faculty))
-            self.tableWidget.setItem(rowPosition, 5, QTableWidgetItem(email))
+            self.tableWidget.setItem(rowPosition, 10, QTableWidgetItem(code))
+            self.tableWidget.setItem(rowPosition, 11, QTableWidgetItem(name))
+            self.tableWidget.setItem(rowPosition, 12, QTableWidgetItem(validation))
+            self.tableWidget.setItem(rowPosition, 13, QTableWidgetItem(remark))
 
             self.close()
 

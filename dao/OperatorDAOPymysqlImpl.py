@@ -1,4 +1,5 @@
 import pymysql
+import datetime
 '''
 installing mysqlclient:
  sudo pip3 install mysqlclient
@@ -98,9 +99,9 @@ class OperatorDAOPymysqlImpl(OperatorDAO):
         self.connect()
         try:
             sql = """insert into {0} values ({1},"{2}","{3}","{4}","{5}","{6}","{7}","{8}","{9}","{10}","{11}","{12}","{13}")""".format(
-                self.tablename, operator.id, operator.create_date,
-                operator.create_time, operator.create_userfullname, operator.create_userid, operator.update_date, operator.update_time, 
-                operator.update_userfullname, operator.update_userid, operator.emp_id, operator.emp_name, operator.is_validator, operator.remark
+                self.tablename, operator.id, str(datetime.datetime.now().strftime("%Y%m%d")),
+                str(datetime.datetime.now().strftime("%H%M%S")), "PyInsert", "1111", str(datetime.datetime.now().strftime("%Y%m%d")), 
+                str(datetime.datetime.now().strftime("%H%M%S")), "PyInsert", "1111", operator.emp_id, operator.emp_name, operator.is_validator, operator.remark
             )
 
             self.cursor.execute(sql)
@@ -128,8 +129,8 @@ class OperatorDAOPymysqlImpl(OperatorDAO):
             update_userfullname = "{3}", update_userid = "{4}", 
             emp_id = "{5}", emp_name = "{6}", is_validator = "{7}", 
             remark = "{8}" where id = {9}""".format(
-                self.tablename, operator.update_date, operator.update_time, 
-                operator.update_userfullname, operator.update_userid, operator.emp_id, 
+                self.tablename, str(datetime.datetime.now().strftime("%Y%m%d")), 
+                str(datetime.datetime.now().strftime("%H%M%S")), "PyUpdate", "2222", operator.emp_id, 
                 operator.emp_name, operator.is_validator, operator.remark, id
             )
             self.cursor.execute(sql)

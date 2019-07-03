@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QHBoxLayout, QGroupBox , QDialog, QVBoxLayout, QGridLayout
 from PyQt5.QtWidgets import QLabel, QTextEdit
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QComboBox
 from PyQt5.QtWidgets import QFormLayout, QLineEdit
 
 from PyQt5.QtWidgets import QSizePolicy, QMainWindow
@@ -12,7 +12,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import Qt
-import datetime
 
 from validator.OperatorValidator import OperatorValidator
 from dao.OperatorDAOPymysqlImpl import OperatorDAOPymysqlImpl
@@ -81,7 +80,9 @@ class OperatorUpdateWindow(QDialog):
 
         # validation
         self.lblValidation = QLabel("Validation: ")
-        self.editValidation = QLineEdit()
+        self.editValidation = QComboBox()
+        self.editValidation.addItem("N")
+        self.editValidation.addItem("Y")
 
         # remark
         self.lblRemark = QLabel("Remark: ")
@@ -104,7 +105,7 @@ class OperatorUpdateWindow(QDialog):
         self.editId.setText(data[0])
         self.editCode.setText(data[9])
         self.editName.setText(data[10])
-        self.editValidation.setText(data[11])
+        self.editValidation.setCurrentText(data[11])
         self.editRemark.setText(data[12])
         self.editId.setReadOnly(True)
 
@@ -132,7 +133,7 @@ class OperatorUpdateWindow(QDialog):
             id = self.editId.text()
             code = self.editCode.text()
             name = self.editName.text()
-            validation = self.editValidation.text()
+            validation = self.editValidation.itemText(self.editValidation.currentIndex())
             remark = self.editRemark.text()
             if not self.validator.validateId(id):
                 errors.append("id is incorrect.")
@@ -153,7 +154,7 @@ class OperatorUpdateWindow(QDialog):
                 raise Exception("\n".join(errors))
 
 
-            self.dao.update(id, Operator(id, "", "", "", "", str(datetime.datetime.now().strftime("%Y%m%d")), str(datetime.datetime.now().strftime("%H%M%S")), "pydemo", "1111", code, name,
+            self.dao.update(id, Operator(id, "", "", "", "", "", "", "", "", code, name,
                                   validation, remark))
 
 
