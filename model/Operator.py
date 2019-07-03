@@ -1,6 +1,6 @@
 import datetime
 class Operator:
-    def __init__(self, id= 0, create_date= "", create_time= "", create_userfullname= "", create_userid = "", update_date= "", update_time= "", update_userfullname= "", update_userid = "", emp_id= "", emp_name= "", is_validator= "", remark = ""):
+    def __init__(self, id= 0, create_date= "", create_time= "", create_userfullname= "", create_userid = "", update_date= "", update_time= "", update_userfullname= "", update_userid = "", emp_id= "", emp_name= "", is_validator= "N", remark = ""):
         """
         constructor 
         

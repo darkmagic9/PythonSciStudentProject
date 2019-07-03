@@ -124,14 +124,13 @@ class OperatorDAOPymysqlImpl(OperatorDAO):
         """
         self.connect()
         try:
-            sql = """update {0} set create_date = "{1}", create_time = "{2}", create_userfullname = "{3}", 
-create_userid = "{4}", update_date = "{5}", operator.update_time = "{6}", 
-operator.update_userfullname = "{7}", operator.update_userid = "{8}", 
-operator.emp_id = "{9}", operator.emp_name = "{10}", operator.is_validator = "{11}", 
-operator.remark = "{12}" where id = {13}""".format(
-                self.tablename, operator.create_date, operator.create_time, operator.create_userfullname ,
-                operator.create_userid , operator.update_date, operator.update_time, 
-                operator.update_userfullname, operator.update_userid, operator.emp_id, operator.emp_name, operator.is_validator, operator.remark, id
+            sql = """update {0} set update_date = "{1}", update_time = "{2}", 
+            update_userfullname = "{3}", update_userid = "{4}", 
+            emp_id = "{5}", emp_name = "{6}", is_validator = "{7}", 
+            remark = "{8}" where id = {9}""".format(
+                self.tablename, operator.update_date, operator.update_time, 
+                operator.update_userfullname, operator.update_userid, operator.emp_id, 
+                operator.emp_name, operator.is_validator, operator.remark, id
             )
             self.cursor.execute(sql)
         except Exception as err:

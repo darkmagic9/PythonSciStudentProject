@@ -111,3 +111,86 @@ class OperatorValidator:
         isValid = validate_email.validate_email(data)
         return isValid
 
+
+    def validateId(self, data):
+        """
+        Validates enrolmentNumber
+        
+        :param data: string 
+        :return: boolean
+        """
+        try:
+            int(data)
+        except Exception as err:
+            print(err)
+            return False
+
+        return True
+
+
+    def validateCode(self, data):
+        """
+        Validates enrolmentNumber
+        
+        :param data: string 
+        :return: boolean
+        """
+        try:
+            int(data)
+        except Exception as err:
+            print(err)
+            return False
+
+        return True
+
+
+
+    def validateName(self, data):
+        """
+        Validates faculty 
+        
+        :param data: string  
+        :return: boolean 
+        """
+        try:
+            str(data)
+        except Exception as err:
+            print(err)
+            return False
+
+        return True
+
+
+
+    def validateValidation(self, data):
+        """
+        Validates faculty 
+        
+        :param data: string  
+        :return: boolean 
+        """
+        try:
+            str(data)
+        except Exception as err:
+            print(err)
+            return False
+
+        return True
+
+
+
+    def validateRemark(self, data):
+        """
+        Validates faculty 
+        
+        :param data: string  
+        :return: boolean 
+        """
+        try:
+            str(data)
+        except Exception as err:
+            print(err)
+            return False
+
+        return True
+
