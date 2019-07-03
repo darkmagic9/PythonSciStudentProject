@@ -12,7 +12,7 @@ class OperatorDAO:
         :return: True if save operation was successful, None if save operation failed.
         """
         pass
-    def update(self, enrolmentNumber, operator):
+    def update(self, id, operator):
         """
         updates Operator from database with enrolmentNumber == enrolmentNumber
         
@@ -22,7 +22,7 @@ class OperatorDAO:
         """
         pass
 
-    def remove(self, enrolmentNumber):
+    def remove(self, id):
         """
         removes Operator from database with enrolmentNumber == enrolmentNumber 
         
@@ -31,7 +31,7 @@ class OperatorDAO:
         """
         pass
 
-    def find_by_id(self, enrolmentNumber):
+    def find_by_id(self, id):
         """
         returns Operator from database with enrolmentNumber == enrolmentNumber or None 
         if no Operator was found in database.

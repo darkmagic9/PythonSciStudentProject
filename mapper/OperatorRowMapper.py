@@ -15,14 +15,21 @@ class OperatorRowMapper:
         """
         ret = None
         try:
-            enrolmentNumber = int(row[0])
-            firstName = row[1]
-            lastName = row[2]
+            id = int(row[0])
+            create_date = row[1]
+            create_time = row[2]
             # print(row[3])
-            dob = row[3]
-            faculty = row[4]
-            email = row[5]
-            ret = Operator(enrolmentNumber, firstName, lastName, dob , faculty, email)
+            create_userfullname = row[3]
+            create_userid = row[4]
+            update_date = row[5]
+            update_time = row[6]
+            update_userfullname = row[7]
+            update_userid = row[8]
+            emp_id = row[9]
+            emp_name = row[10]
+            is_validator = row[11]
+            remark = row[12]
+            ret = Operator(id, create_date, create_time, create_userfullname, create_userid, update_date, update_time, update_userfullname, update_userid, emp_id, emp_name, is_validator, remark)
         except Exception as err:
             print(err)
 

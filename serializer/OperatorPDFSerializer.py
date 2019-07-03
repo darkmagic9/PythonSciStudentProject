@@ -25,15 +25,16 @@ class OperatorPDFSerializer:
         doc = SimpleDocTemplate(filename, pagesize=A3)
         elements = []
         data = []
-        data.append(["EnrollmentNumber", "FirstName", "LastName", "DOB",
-                     "Faculty", "Email"])
+        data.append(["id", "create_date", "create_time", "create_userfullname",
+                     "create_userid", "update_date", "update_time", "update_userfullname",
+                     "update_userid", "emp_id", "emp_name", "is_validator", "remark"])
         mapper = OperatorListMapper()
         for operator in operators:
             data.append(mapper.map_to_list(operator))
 
-        width = 6
+        width = 13
         height = len(data)
-        t = Table(data, width * [2 * inch], height * [0.5 * inch])
+        t = Table(data, width * [1 * inch], height * [0.5 * inch])
         # t.setStyle(TableStyle([('TEXTCOLOR', (0, 0), (1, -1), colors.red)]))
         t.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),

@@ -18,7 +18,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QAbstractItemView, QFileDialog
 from PyQt5 import QtWidgets
 
-from dao.OperatorDAOSqliteImpl import OperatorDAOSqliteImpl
+from dao.OperatorDAOPymysqlImpl import OperatorDAOPymysqlImpl
 from model.Operator import Operator
 from mapper.OperatorListMapper import OperatorListMapper
 from gui.OperatorSaveWindow import OperatorSaveWindow
@@ -48,7 +48,7 @@ class OperatorFindAllWindow(QDialog):
         super().__init__()
         self.title = "All Operators"
         self.left , self.top, self.width , self.height = 50 , 50, 900, 500
-        self.dao = OperatorDAOSqliteImpl()
+        self.dao = OperatorDAOPymysqlImpl()
         self.mapper = OperatorListMapper()
         self.initGUI()
 
@@ -75,7 +75,7 @@ class OperatorFindAllWindow(QDialog):
         data = self.dao.find_all()
         self.tableWidget.setRowCount(len(data))
         self.tableWidget.setAlternatingRowColors(True)
-        self.tableWidget.setColumnCount(6)
+        self.tableWidget.setColumnCount(13)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
@@ -83,18 +83,26 @@ class OperatorFindAllWindow(QDialog):
         self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
 
-        for i, student in enumerate(data):
-            # print(type(student))
-            l = self.mapper.map_to_list(student)
+        for i, operator in enumerate(data):
+            # print(type(operator))
+            l = self.mapper.map_to_list(operator)
             self.tableWidget.setItem(i, 0, QTableWidgetItem(l[0]))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(l[1]))
             self.tableWidget.setItem(i, 2, QTableWidgetItem(l[2]))
             self.tableWidget.setItem(i, 3, QTableWidgetItem(l[3]))
             self.tableWidget.setItem(i, 4, QTableWidgetItem(l[4]))
             self.tableWidget.setItem(i, 5, QTableWidgetItem(l[5]))
+            self.tableWidget.setItem(i, 6, QTableWidgetItem(l[6]))
+            self.tableWidget.setItem(i, 7, QTableWidgetItem(l[7]))
+            self.tableWidget.setItem(i, 8, QTableWidgetItem(l[8]))
+            self.tableWidget.setItem(i, 9, QTableWidgetItem(l[9]))
+            self.tableWidget.setItem(i, 10, QTableWidgetItem(l[10]))
+            self.tableWidget.setItem(i, 11, QTableWidgetItem(l[11]))
+            self.tableWidget.setItem(i, 12, QTableWidgetItem(l[12]))
 
-        self.tableWidget.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
-                                                    "Faculty", "Email"])
+        self.tableWidget.setHorizontalHeaderLabels(["id", "create_date", "create_time", "create_userfullname",
+                                                    "create_userid", "update_date", "update_time", "update_userfullname",
+                                                    "update_userid", "emp_id", "emp_name", "is_validator", "remark"])
         # self.tableWidget.resizeColumnsToContents()
 
 
@@ -458,7 +466,7 @@ class OperatorFindAllWindow(QDialog):
         tableOperators = QTableWidget()
         tableOperators.setRowCount(len(operator))
         tableOperators.setAlternatingRowColors(True)
-        tableOperators.setColumnCount(6)
+        tableOperators.setColumnCount(13)
         tableOperators.horizontalHeader().setCascadingSectionResizes(False)
         tableOperators.horizontalHeader().setSortIndicatorShown(False)
         tableOperators.horizontalHeader().setStretchLastSection(True)
@@ -467,20 +475,28 @@ class OperatorFindAllWindow(QDialog):
         tableOperators.verticalHeader().setStretchLastSection(False)
 
 
-        for i, student in enumerate(operator):
-            # print(type(student))
-            l = self.mapper.map_to_list(student)
+        for i, operator in enumerate(operator):
+            # print(type(operator))
+            l = self.mapper.map_to_list(operator)
             tableOperators.setItem(i, 0, QTableWidgetItem(l[0]))
             tableOperators.setItem(i, 1, QTableWidgetItem(l[1]))
             tableOperators.setItem(i, 2, QTableWidgetItem(l[2]))
             tableOperators.setItem(i, 3, QTableWidgetItem(l[3]))
             tableOperators.setItem(i, 4, QTableWidgetItem(l[4]))
             tableOperators.setItem(i, 5, QTableWidgetItem(l[5]))
+            tableOperators.setItem(i, 6, QTableWidgetItem(l[6]))
+            tableOperators.setItem(i, 7, QTableWidgetItem(l[7]))
+            tableOperators.setItem(i, 8, QTableWidgetItem(l[8]))
+            tableOperators.setItem(i, 9, QTableWidgetItem(l[9]))
+            tableOperators.setItem(i, 10, QTableWidgetItem(l[10]))
+            tableOperators.setItem(i, 11, QTableWidgetItem(l[11]))
+            tableOperators.setItem(i, 12, QTableWidgetItem(l[12]))
 
 
 
-        tableOperators.setHorizontalHeaderLabels(["EnrolmentNumber", "FirstName", "LastName", "DOB",
-                                                    "Faculty", "Email"])
+        tableOperators.setHorizontalHeaderLabels(["id", "create_date", "create_time", "create_userfullname",
+                                                    "create_userid", "update_date", "update_time", "update_userfullname",
+                                                    "update_userid", "emp_id", "emp_name", "is_validator", "remark"])
         tableOperators.resizeColumnsToContents()
 
         mainLayout.addWidget(tableOperators)
