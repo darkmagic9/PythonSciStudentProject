@@ -457,14 +457,14 @@ class OperatorFindAllWindow(QDialog):
         # table widget
         tableOperators = QTableWidget()
         tableOperators.setRowCount(len(operator))
-        tableStudents.setAlternatingRowColors(True)
-        tableStudents.setColumnCount(6)
-        tableStudents.horizontalHeader().setCascadingSectionResizes(False)
-        tableStudents.horizontalHeader().setSortIndicatorShown(False)
-        tableStudents.horizontalHeader().setStretchLastSection(True)
-        tableStudents.verticalHeader().setVisible(False)
-        tableStudents.verticalHeader().setCascadingSectionResizes(False)
-        tableStudents.verticalHeader().setStretchLastSection(False)
+        tableOperators.setAlternatingRowColors(True)
+        tableOperators.setColumnCount(6)
+        tableOperators.horizontalHeader().setCascadingSectionResizes(False)
+        tableOperators.horizontalHeader().setSortIndicatorShown(False)
+        tableOperators.horizontalHeader().setStretchLastSection(True)
+        tableOperators.verticalHeader().setVisible(False)
+        tableOperators.verticalHeader().setCascadingSectionResizes(False)
+        tableOperators.verticalHeader().setStretchLastSection(False)
 
 
         for i, student in enumerate(operator):

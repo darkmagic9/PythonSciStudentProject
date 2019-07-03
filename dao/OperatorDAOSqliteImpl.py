@@ -1,6 +1,6 @@
 import sqlite3
 import sys
-print(sys.argv[0])
+
 from dao.OperatorDAO import OperatorDAO
 from mapper.OperatorRowMapper import OperatorRowMapper
 

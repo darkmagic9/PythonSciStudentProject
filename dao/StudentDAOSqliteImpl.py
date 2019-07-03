@@ -1,6 +1,6 @@
 import sqlite3
 import sys
-print(sys.argv[0])
+
 from dao.StudentDAO import StudentDAO
 from mapper.StudentRowMapper import StudentRowMapper
 
