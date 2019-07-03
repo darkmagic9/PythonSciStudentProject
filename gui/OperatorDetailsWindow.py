@@ -66,12 +66,12 @@ class OperatorDetailsWindow(QDialog):
         self.lblEmpty = QLabel()
 
         # enrolmentNumber
-        self.lblEnrolmentNumber = QLabel("EnrolmentNumber: ")
-        self.editEnrolmentNumber = QLineEdit()
+        self.lblID = QLabel("ID: ")
+        self.editID = QLineEdit()
 
         # firstName
-        self.lblFirstName = QLabel("FirstName: ")
-        self.editFirstName = QLineEdit()
+        self.lblCode = QLabel("Code: ")
+        self.editCode = QLineEdit()
 
 
         # lastName
@@ -79,43 +79,36 @@ class OperatorDetailsWindow(QDialog):
         self.editLastName = QLineEdit()
 
         # dob
-        self.lblDob = QLabel("DateOfBirth: ")
-        self.editDob = QLineEdit()
+        self.lblValidation = QLabel("Validation: ")
+        self.editValidation = QLineEdit()
 
         # faculty
-        self.lblFaculty = QLabel("Faculty: ")
-        self.editFaculty = QLineEdit()
-
-        # email
-        self.lblEmail = QLabel("Email: ")
-        self.editEmail = QLineEdit()
+        self.lblRemark = QLabel("Remark: ")
+        self.editRemark = QLineEdit()
 
         # buttons
         self.btnClose = QPushButton("Close")
 
         # add all rows to mainLayout
         self.mainLayout.addRow(self.lblEmpty, self.lblTitle)
-        self.mainLayout.addRow(self.lblEnrolmentNumber, self.editEnrolmentNumber)
-        self.mainLayout.addRow(self.lblFirstName, self.editFirstName)
+        self.mainLayout.addRow(self.lblID, self.editID)
+        self.mainLayout.addRow(self.lblCode, self.editCode)
         self.mainLayout.addRow(self.lblLastName, self.editLastName)
-        self.mainLayout.addRow(self.lblDob, self.editDob)
-        self.mainLayout.addRow(self.lblFaculty, self.editFaculty)
-        self.mainLayout.addRow(self.lblEmail, self.editEmail)
+        self.mainLayout.addRow(self.lblValidation, self.editValidation)
+        self.mainLayout.addRow(self.lblRemark, self.editRemark)
         self.mainLayout.addRow(QLabel(), self.btnClose)
 
-        self.editEnrolmentNumber.setText(self.data[0])
-        self.editFirstName.setText(self.data[1])
-        self.editLastName.setText(self.data[2])
-        self.editDob.setText(self.data[3])
-        self.editFaculty.setText(self.data[4])
-        self.editEmail.setText(self.data[5])
+        self.editID.setText(self.data[0])
+        self.editCode.setText(self.data[9])
+        self.editLastName.setText(self.data[10])
+        self.editValidation.setText(self.data[11])
+        self.editRemark.setText(self.data[12])
 
-        self.editEnrolmentNumber.setReadOnly(True)
-        self.editFirstName.setReadOnly(True)
+        self.editID.setReadOnly(True)
+        self.editCode.setReadOnly(True)
         self.editLastName.setReadOnly(True)
-        self.editDob.setReadOnly(True)
-        self.editFaculty.setReadOnly(True)
-        self.editEmail.setReadOnly(True)
+        self.editValidation.setReadOnly(True)
+        self.editRemark.setReadOnly(True)
 
     def registerEvents(self):
         """
